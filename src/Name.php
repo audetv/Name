@@ -54,6 +54,8 @@ class Name
 
     /**
      * @param bool $lastNameIsFirst
+     * @param bool $asInitial
+     *
      * @return string
      */
     public function getFull(bool $lastNameIsFirst = true, bool $asInitial = false): string
@@ -78,6 +80,8 @@ class Name
     }
 
     /**
+     * @param bool $asInitial
+     *
      * @return string
      */
     public function getFirstWithLast(bool $asInitial = false): string
@@ -86,6 +90,8 @@ class Name
     }
 
     /**
+     * @param bool $asInitial
+     *
      * @return string
      */
     public function getLastWithFirst(bool $asInitial = false): string
@@ -104,6 +110,7 @@ class Name
 
     /**
      * @param bool $asInitial
+     * @param bool $addSpace
      *
      * @return Name
      */
@@ -139,6 +146,7 @@ class Name
 
     /**
      * @param bool $asInitial
+     * @param bool $addSpace
      *
      * @return Name
      */
