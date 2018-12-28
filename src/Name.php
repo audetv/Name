@@ -161,4 +161,28 @@ class Name
     {
         return trim($this->name);
     }
+
+    /**
+     * @return string
+     */
+    public function getLast(): string
+    {
+        return $this->last;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirst(): string
+    {
+        return $this->first;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPatronymic(): ?string
+    {
+        return $this->patronymic;
+    }
 }
