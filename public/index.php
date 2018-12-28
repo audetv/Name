@@ -16,7 +16,7 @@ $name = new Name('Иванов', 'Иван', 'Иванович');
 
 //echo $name->build()->last()->first(true)->patronymic(true).'<br />';
 //$name = $name->build()->last();
-//echo $name;
+echo $name.'<br />';
 echo $name->getFull(true, true).'<br />';
 echo $name->getFull(false, true).'<br />';
 echo $name->getFirstWithPatronymic().'<br />';

@@ -50,6 +50,8 @@ class Name
         $this->last = $last;
         $this->first = $first;
         $this->patronymic = $patronymic;
+
+        $this->name = $this->getFull();
     }
 
     /**
