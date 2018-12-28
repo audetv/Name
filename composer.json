@@ -1,6 +1,6 @@
 {
-  "name": "audetv/usalvo",
-  "description": "Frequently used value objects",
+  "name": "audetv/Name",
+  "description": "Personal name object",
   "license": "MIT",
   "author": {"name": "Alexey Gusev", "homepage": "https://github.com/audetv"},
   "config": {
@@ -11,7 +11,7 @@
   },
   "autoload": {
     "psr-4": {
-      "audetv\\usualvo\\": "src/"
+      "audetv\\Name\\": "src/"
     }
   }
 }

@@ -6,10 +6,10 @@
  * Time: 9:41
  */
 
-namespace audetv\usualvo\Name;
+namespace audetv\Name;
 
 
-use audetv\usualvo\helpers\StringHelper;
+use audetv\Name\helpers\StringHelper;
 
 
 class Name

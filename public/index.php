@@ -6,18 +6,14 @@
  * Time: 11:39
  */
 
-use audetv\usualvo\Name\Name;
+
+use audetv\Name\Name;
 
 chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
-$name = new Name('Гусев', 'Алексей', 'Валерьевич');
+$name = new Name('Иванов', 'Иван', 'Иванович');
 
-/*echo $name->build([
-    (new Part($name->getLast()))->add(' '),
-    (new Part(StringHelper::initialLetter($name->getFirst())))->add('.'),
-    (new Part(StringHelper::initialLetter($name->getPatronymic())))->add('.'),
-    ]).'<br />';*/
 //echo $name->build()->last()->first(true)->patronymic(true).'<br />';
 //$name = $name->build()->last();
 //echo $name;

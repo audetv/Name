@@ -6,7 +6,7 @@
  * Time: 9:41
  */
 
-namespace audetv\usualvo\helpers;
+namespace audetv\Name\helpers;
 
 
 class StringHelper
