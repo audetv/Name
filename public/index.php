@@ -18,9 +18,11 @@ $name = new Name('Гусев', 'Алексей', 'Валерьевич');
     (new Part(StringHelper::initialLetter($name->getFirst())))->add('.'),
     (new Part(StringHelper::initialLetter($name->getPatronymic())))->add('.'),
     ]).'<br />';*/
-//echo $name->last()->add(' ')->first(true)->add('.')->patronymic(true)->add('.')->show().'<br />';
-echo $name->getFull(true).'<br />';
-echo $name->getFull(false).'<br />';
+//echo $name->build()->last()->first(true)->patronymic(true).'<br />';
+//$name = $name->build()->last();
+//echo $name;
+echo $name->getFull(true, true).'<br />';
+echo $name->getFull(false, true).'<br />';
 echo $name->getFirstWithPatronymic().'<br />';
-echo $name->getFirstWithLast().'<br />';
-echo $name->getLastWithFirst().'<br />';
+echo $name->getFirstWithLast(true).'<br />';
+echo $name->getLastWithFirst(true).'<br />';

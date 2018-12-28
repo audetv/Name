@@ -52,18 +52,19 @@ class Name
         $this->patronymic = $patronymic;
     }
 
-
     /**
      * @param bool $lastNameIsFirst
      * @return string
      */
-    public function getFull($lastNameIsFirst = true): string
+    public function getFull(bool $lastNameIsFirst = true, bool $asInitial = false): string
     {
         $name = $this->build();
+
         if ($lastNameIsFirst)
-            $name = $name->last()->add(' ')->first()->add(' ')->patronymic()->add(' ')->show();
+            $name = $name->last()->first($asInitial)->patronymic($asInitial);
+
         else
-            $name = $name->first()->add(' ')->patronymic()->add(' ')->last()->show();
+            $name = $name->first($asInitial)->patronymic($asInitial, true)->last();
 
         return $name;
     }
@@ -73,23 +74,23 @@ class Name
      */
     public function getFirstWithPatronymic()
     {
-        return $this->build()->first()->add(' ')->patronymic()->show();
+        return $this->build()->first()->patronymic();
     }
 
     /**
      * @return string
      */
-    public function getFirstWithLast(): string
+    public function getFirstWithLast(bool $asInitial = false): string
     {
-        return $this->build()->first()->add(' ')->last()->show();
+        return $this->build()->first($asInitial, true)->last();
     }
 
     /**
      * @return string
      */
-    public function getLastWithFirst(): string
+    public function getLastWithFirst(bool $asInitial = false): string
     {
-        return $this->build()->last()->add(' ')->first(true)->show();
+        return $this->build()->last()->first($asInitial);
     }
 
     /**
@@ -102,59 +103,62 @@ class Name
     }
 
     /**
+     * @param bool $asInitial
+     *
+     * @return Name
+     */
+    public function last($asInitial = false, $addSpace = false): self
+    {
+        if ($asInitial){
+            $this->name .= StringHelper::initialLetter($this->last) . '.';
+            if($addSpace)
+                $this->name .= ' ';
+        }
+        else
+            $this->name .= $this->last . ' ';
+        return $this;
+    }
+
+    /**
+     * @param bool $asInitial
+     * @param bool $addSpace
+     *
+     * @return Name
+     */
+    public function first($asInitial = false, $addSpace = false): self
+    {
+        if ($asInitial){
+            $this->name .= StringHelper::initialLetter($this->first) . '.';
+            if($addSpace)
+                $this->name .= ' ';
+        }
+        else
+            $this->name .= $this->first . ' ';
+        return $this;
+    }
+
+    /**
+     * @param bool $asInitial
+     *
+     * @return Name
+     */
+    public function patronymic($asInitial = false, $addSpace = false): self
+    {
+        if ($asInitial) {
+            $this->name .= StringHelper::initialLetter($this->patronymic) . '.';
+            if ($addSpace)
+                $this->name .= ' ';
+        }
+        else
+            $this->name .= $this->patronymic . ' ';
+        return $this;
+    }
+
+    /**
      * @return string
      */
-    public function show(): string
+    public function __toString(): string
     {
-        return $this->name;
-    }
-
-    /**
-     * @param bool $initial
-     * @return Name
-     */
-    public function last($initial = false): self
-    {
-        if($initial)
-            $this->name .= StringHelper::initialLetter($this->last);
-        else
-            $this->name .= $this->last;
-        return $this;
-    }
-
-    /**
-     * @param bool $initial
-     * @return Name
-     */
-    public function first($initial = false): self
-    {
-        if($initial)
-            $this->name .= StringHelper::initialLetter($this->first);
-        else
-            $this->name .= $this->first;
-        return $this;
-    }
-
-    /**
-     * @param bool $initial
-     * @return Name
-     */
-    public function patronymic($initial = false): self
-    {
-        if($initial)
-            $this->name .= StringHelper::initialLetter($this->patronymic);
-        else
-            $this->name .= $this->patronymic;
-        return $this;
-    }
-
-    /**
-     * @param string $char
-     * @return $this
-     */
-    public function add(string $char)
-    {
-        $this->name .= $char;
-        return $this;
+        return trim($this->name);
     }
 }
