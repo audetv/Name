@@ -36,13 +36,15 @@ class StringHelper
     /**
      * @param string $str
      * @param int $length
-     * @return mixed|string
+     * @param bool $encode
+     * @return string
      */
-    public static function cut(string $str, $length = 200)
+    public static function cut(string $str, $length = 200, $encode = true): string
     {
         $str = strip_tags($str);
         $str = str_replace('&nbsp;', '', $str);
-        $str = htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
+        if($encode)
+            $str = htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
         if(mb_strlen($str) > $length) {
             $str = mb_substr($str, 0, $length);
             $str = rtrim($str, "!,.-");
