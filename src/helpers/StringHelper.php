@@ -32,4 +32,23 @@ class StringHelper
         $str = trim(mb_substr($uc ? self::ucfirst($str, $encoding): $str, 0, 1, $encoding));
         return $str;
     }
+
+    /**
+     * @param string $str
+     * @param int $length
+     * @return mixed|string
+     */
+    public static function cut(string $str, $length = 200)
+    {
+        $str = strip_tags($str);
+        $str = str_replace('&nbsp;', '', $str);
+        $str = htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
+        if(mb_strlen($str) > $length) {
+            $str = mb_substr($str, 0, $length);
+            $str = rtrim($str, "!,.-");
+            $str = mb_substr($str, 0, strrpos($str, ' '));
+            $str = $str."… ";
+        }
+        return $str;
+    }
 }
