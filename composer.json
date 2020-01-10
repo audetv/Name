@@ -2,12 +2,13 @@
   "name": "audetv/Name",
   "description": "Personal name object",
   "license": "MIT",
-  "author": {"name": "Alexey Gusev", "homepage": "https://github.com/audetv"},
+  "author": {"name": "Aleksey Gusev", "homepage": "https://github.com/audetv"},
   "config": {
     "sort-packages": true
   },
   "require": {
-    "php": ">=7.1.0"
+    "php": ">=7.1.0",
+    "ext-mbstring": "*"
   },
   "autoload": {
     "psr-4": {

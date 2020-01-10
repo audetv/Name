@@ -1,22 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Гусев
- * Date: 28.12.2018
- * Time: 9:41
- */
 
 namespace audetv\Name\helpers;
 
-
+/**
+ * Class StringHelper
+ * @package audetv\Name\helpers
+ * @author Aleksey Gusev <audetv@gmail.com>
+ */
 class StringHelper
 {
+    const ENCODING = 'UTF-8';
+
     /**
      * @param string $str
      * @param string $encoding
      * @return string
      */
-    public static function ucfirst(string $str, $encoding = 'UTF-8')
+    public static function ucfirst(string $str, $encoding = self::ENCODING): string
     {
         return trim(mb_substr(mb_strtoupper($str, $encoding), 0, 1, $encoding) . mb_substr($str, 1, mb_strlen($str) - 1, $encoding));
     }
@@ -27,10 +27,9 @@ class StringHelper
      * @param string $encoding
      * @return string
      */
-    public static function initialLetter(string $str, $uc = true, $encoding = 'UTF-8')
+    public static function initialLetter(string $str, $uc = true, $encoding = self::ENCODING): string
     {
-        $str = trim(mb_substr($uc ? self::ucfirst($str, $encoding): $str, 0, 1, $encoding));
-        return $str;
+        return trim(mb_substr($uc ? self::ucfirst($str, $encoding): $str, 0, 1, $encoding));
     }
 
     /**
@@ -43,8 +42,10 @@ class StringHelper
     {
         $str = strip_tags($str);
         $str = str_replace('&nbsp;', '', $str);
-        if($encode)
-            $str = htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
+
+        if($encode) {
+            $str = htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE, self::ENCODING, false);
+        }
         if(mb_strlen($str) > $length) {
             $str = mb_substr($str, 0, $length);
             $str = rtrim($str, "!,.-");

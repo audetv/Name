@@ -1,17 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Гусев
- * Date: 28.12.2018
- * Time: 9:41
- */
 
 namespace audetv\Name;
 
-
 use audetv\Name\helpers\StringHelper;
 
-
+/**
+ * Class Name
+ * @package audetv\Name
+ * @author Aleksey Gusev <audetv@gmail.com>
+ */
 class Name
 {
     /**
@@ -62,15 +59,77 @@ class Name
      */
     public function getFull(bool $lastNameIsFirst = true, bool $asInitial = false): string
     {
-        $name = $this->build();
+        if ($lastNameIsFirst) {
+            return $this->build()->last()->first($asInitial)->patronymic($asInitial);
+        } else {
+            return $this->build()->first($asInitial)->patronymic($asInitial, true)->last();
+        }
+    }
 
-        if ($lastNameIsFirst)
-            $name = $name->last()->first($asInitial)->patronymic($asInitial);
+    /**
+     * @param bool $asInitial
+     * @param bool $addSpace
+     *
+     * @return Name
+     */
+    public function patronymic($asInitial = false, $addSpace = false): self
+    {
+        if ($asInitial) {
+            $this->name .= StringHelper::initialLetter($this->patronymic) . '.';
+            if ($addSpace) {
+                $this->name .= ' ';
+            }
+        } else {
+            $this->name .= $this->patronymic . ' ';
+        }
+        return $this;
+    }
 
-        else
-            $name = $name->first($asInitial)->patronymic($asInitial, true)->last();
+    /**
+     * @param bool $asInitial
+     * @param bool $addSpace
+     *
+     * @return Name
+     */
+    public function first($asInitial = false, $addSpace = false): self
+    {
+        if ($asInitial) {
+            $this->name .= StringHelper::initialLetter($this->first) . '.';
+            if ($addSpace) {
+                $this->name .= ' ';
+            }
+        } else {
+            $this->name .= $this->first . ' ';
+        }
+        return $this;
+    }
 
-        return $name;
+    /**
+     * @param bool $asInitial
+     * @param bool $addSpace
+     *
+     * @return Name
+     */
+    public function last($asInitial = false, $addSpace = false): self
+    {
+        if ($asInitial) {
+            $this->name .= StringHelper::initialLetter($this->last) . '.';
+            if ($addSpace) {
+                $this->name .= ' ';
+            }
+        } else {
+            $this->name .= $this->last . ' ';
+        }
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function build()
+    {
+        $this->name = '';
+        return $this;
     }
 
     /**
@@ -99,69 +158,6 @@ class Name
     public function getLastWithFirst(bool $asInitial = false): string
     {
         return $this->build()->last()->first($asInitial);
-    }
-
-    /**
-     * @return $this
-     */
-    public function build()
-    {
-        $this->name = '';
-        return $this;
-    }
-
-    /**
-     * @param bool $asInitial
-     * @param bool $addSpace
-     *
-     * @return Name
-     */
-    public function last($asInitial = false, $addSpace = false): self
-    {
-        if ($asInitial){
-            $this->name .= StringHelper::initialLetter($this->last) . '.';
-            if($addSpace)
-                $this->name .= ' ';
-        }
-        else
-            $this->name .= $this->last . ' ';
-        return $this;
-    }
-
-    /**
-     * @param bool $asInitial
-     * @param bool $addSpace
-     *
-     * @return Name
-     */
-    public function first($asInitial = false, $addSpace = false): self
-    {
-        if ($asInitial){
-            $this->name .= StringHelper::initialLetter($this->first) . '.';
-            if($addSpace)
-                $this->name .= ' ';
-        }
-        else
-            $this->name .= $this->first . ' ';
-        return $this;
-    }
-
-    /**
-     * @param bool $asInitial
-     * @param bool $addSpace
-     *
-     * @return Name
-     */
-    public function patronymic($asInitial = false, $addSpace = false): self
-    {
-        if ($asInitial) {
-            $this->name .= StringHelper::initialLetter($this->patronymic) . '.';
-            if ($addSpace)
-                $this->name .= ' ';
-        }
-        else
-            $this->name .= $this->patronymic . ' ';
-        return $this;
     }
 
     /**
